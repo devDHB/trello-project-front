@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const MyBoard = (props) => {
   const boardData = props.boardData;
   console.log(props);
+
+  const [myBoard, setMyBoard] = useState();
 
   useEffect(() => {
     document

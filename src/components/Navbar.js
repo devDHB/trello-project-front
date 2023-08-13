@@ -25,7 +25,7 @@ const Navbar = (props) => {
   }
   async function logOut() {
     await axios
-      .post("/members/logout")
+      .post("/localhost:3000/auth/logout")
       .then((res) => res.json())
       .then((data) => {
         console.log("로그아웃 성공");

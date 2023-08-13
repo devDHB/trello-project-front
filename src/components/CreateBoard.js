@@ -24,7 +24,7 @@ const CreateBoard = (props) => {
     };
 
     axios
-      .post("http://localhost:3000/boards/", {
+      .post("http://localhost:3001/boards/", {
         boardData,
       })
       .then((res) => {

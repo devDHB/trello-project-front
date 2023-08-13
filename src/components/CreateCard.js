@@ -29,7 +29,7 @@ const CreateCard = (props) => {
     };
 
     axios
-      .post("http://localhost:3000/boards/:boardId/cards", {
+      .post("http://localhost:3001/boards/:boardId/cards", {
         createCardData,
       })
       .then((res) => {

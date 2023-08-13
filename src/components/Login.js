@@ -24,7 +24,7 @@ const LoginForm = () => {
     console.log(userData);
 
     axios
-      .post("http://localhost:3000/members/signup", {
+      .post("http://localhost:3001/user/signup", {
         userData,
       })
       .then((res) => {
@@ -45,7 +45,7 @@ const LoginForm = () => {
       password: password,
     };
     axios
-      .post("http://localhost:3000/members/signin", {
+      .post("http://localhost:3001/auth/login", {
         loginData,
       })
       .then((res) => {

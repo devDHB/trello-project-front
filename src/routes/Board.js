@@ -155,23 +155,26 @@ const CardItem = (props) => {
 //   });
 // };
 
-const Board = (fetchUrl) => {
+const Board = () => {
   const { boardId } = useParams();
   const [board, setBoard] = useState([]);
+  const [boardDescription, setBoardDescription] = useState("");
 
   useEffect(() => {
-    // fetchBoardData();
-  });
+    async function fetchData() {
+      const boards = await fetchBoardData();
+      const boardsDescription = boards.map((board) => board.description);
+      setBoardDescription(boardsDescription);
+    }
+    fetchData();
+  }, []);
 
-  // const fetchBoardData = async () => {
-  //   const request = await axios.get("http://localhost:3000/boards");
-  //   setBoard(request.data.data);
-  //   return request;
-  // };
+  const fetchBoardData = async () => {
+    const request = await axios.get("http://localhost:3001/boards");
+    setBoard(request.data.data);
+    return request;
+  };
 
-  const [boardDescription, setBoardDescription] = useState(
-    boardData[boardId - 1].description
-  );
   // const [inputValue, setInputValue] = useState("");
 
   // function boardDescriptionModify(e) {
@@ -189,6 +192,31 @@ const Board = (fetchUrl) => {
   //   setInputValue(e.target.value);
   // };
 
+  // const boardData = props.boardData;
+  // const [myBoard, setMyBoard] = useState();
+  const MyBoard = () => {
+    const MyBoardList = () => {
+      return board.map((board) => {
+        return (
+          <li className="my-board-list" key={board.boardId}>
+            {board.description}
+          </li>
+        );
+      });
+    };
+
+    return (
+      <div className="my-board-modal outer">
+        <div className="my-board-container inner">
+          <h3>내 보드 목록</h3>
+          <ul>
+            <MyBoardList />
+          </ul>
+        </div>
+      </div>
+    );
+  };
+
   const BoardList = () => {
     return (
       <div>
@@ -196,7 +224,7 @@ const Board = (fetchUrl) => {
           {boardId == null || boardId == 0 ? (
             <div>
               <h1>보드 페이지입니다</h1>
-              <p>보드를 생성하거나, 보드를 불러와주세요</p>
+              <MyBoard />
             </div>
           ) : (
             <h1 className="board-description">{boardDescription}</h1>

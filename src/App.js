@@ -6,7 +6,7 @@ import Board from "./routes/Board";
 import LoginForm from "./components/Login";
 import Navbar from "./components/Navbar";
 import CreateBoard from "./components/CreateBoard.js";
-import MyBoard from "./components/MyBoard.js";
+// import MyBoard from "./components/MyBoard.js";
 import MemberList from "./components/MemberList.js";
 import Invite from "./components/Invite.js";
 import MyPage from "./components/MyPage.js";
@@ -21,14 +21,14 @@ const Title = () => {
 
 function App() {
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [showMyBoardModal, setShowMyBoardModal] = useState(false);
+  // const [showMyBoardModal, setShowMyBoardModal] = useState(false);
   const [showMemberModal, setShowMemberModal] = useState(false);
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [showMyPageModal, setShowMyPageModal] = useState(false);
 
   const modalList = [
     setShowCreateModal,
-    setShowMyBoardModal,
+    // setShowMyBoardModal,
     setShowMemberModal,
     setShowInviteModal,
     setShowMyPageModal,
@@ -55,12 +55,12 @@ function App() {
               {showCreateModal && (
                 <CreateBoard setShowCreateModal={setShowCreateModal} />
               )}
-              {showMyBoardModal && (
+              {/* {showMyBoardModal && (
                 <MyBoard
                   setShowMyBoardModal={setShowMyBoardModal}
                   boardData={boardData}
                 />
-              )}
+              )} */}
               {showMemberModal && (
                 <MemberList
                   setShowMemberModal={setShowMemberModal}

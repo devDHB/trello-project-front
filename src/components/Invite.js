@@ -11,7 +11,7 @@ const Invite = (props) => {
       email: email,
     };
     axios
-      .post("http://localhost:3000/boards/:boardId/invitation", {
+      .post("http://localhost:3001/boards/:boardId/invitation", {
         inviteData,
       })
       .then((res) => {
