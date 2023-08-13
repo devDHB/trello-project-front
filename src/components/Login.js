@@ -14,18 +14,18 @@ const LoginForm = () => {
   async function handleSignUp(e) {
     console.log("회원가입 클릭");
     e.preventDefault();
-    const userData = {
+    const data = {
       email: email,
       password: password,
-      confirmPassword: confirmPassword,
+      confirm: confirmPassword,
       name: name,
       content: content,
     };
-    console.log(userData);
+    console.log(data);
 
     axios
-      .post("http://localhost:3000/members/signup", {
-        userData,
+      .post("http://localhost:3001/api/user/signup", {
+        data,
       })
       .then((res) => {
         console.log(res.data);
@@ -40,13 +40,13 @@ const LoginForm = () => {
   async function handleSignIn(e) {
     console.log("로그인 클릭");
     e.preventDefault();
-    const loginData = {
+    const data = {
       email: email,
       password: password,
     };
     axios
-      .post("http://localhost:3000/members/signin", {
-        loginData,
+      .post("http://localhost:3001/api/auth/login", {
+        data,
       })
       .then((res) => {
         console.log(res.data);
