@@ -18,14 +18,14 @@ const CreateBoard = (props) => {
   async function handleCreateBoard(e) {
     e.preventDefault();
 
-    const boardData = {
+    const data = {
       description: description,
       color: color,
     };
 
     axios
       .post("http://localhost:3000/boards/", {
-        boardData,
+        data,
       })
       .then((res) => {
         console.log(res.data);

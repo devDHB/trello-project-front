@@ -21,7 +21,7 @@ const CreateCard = (props) => {
 
     let 현재카드데이터 = "";
 
-    const createCardData = {
+    const data = {
       boarId: props.boardId,
       description: description,
       position: 현재카드데이터.position + 1,
@@ -30,7 +30,7 @@ const CreateCard = (props) => {
 
     axios
       .post("http://localhost:3000/boards/:boardId/cards", {
-        createCardData,
+       data,
       })
       .then((res) => {
         console.log(res.data);

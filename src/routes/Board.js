@@ -155,23 +155,36 @@ const CardItem = (props) => {
 //   });
 // };
 
-const Board = (fetchUrl) => {
+const Board = () => {
   const { boardId } = useParams();
   const [board, setBoard] = useState([]);
-
+  const [boardDescription, setBoardDescription] = useState('');
+ 
+ 
   useEffect(() => {
-    // fetchBoardData();
-  });
+    async function fetchData() {
+      const boards = await fetchBoardData();
+      const boardsDescription = boards.map(board => board.description);
+      setBoardDescription(boardsDescription);
+    }
+    
+    fetchData(); 
+  
+  }, []); 
+  
+  
+  
+  
+  
+  
 
-  // const fetchBoardData = async () => {
-  //   const request = await axios.get("http://localhost:3000/boards");
-  //   setBoard(request.data.data);
-  //   return request;
-  // };
+  const fetchBoardData = async () => {
+    const request = await axios.get("http://localhost:3001/api/boards");
+    setBoard(request.data.data);
+    return request;
+  };
 
-  const [boardDescription, setBoardDescription] = useState(
-    boardData[boardId - 1].description
-  );
+
   // const [inputValue, setInputValue] = useState("");
 
   // function boardDescriptionModify(e) {
@@ -189,33 +202,56 @@ const Board = (fetchUrl) => {
   //   setInputValue(e.target.value);
   // };
 
-  const BoardList = () => {
+  const MyBoard = () => {
+    const MyBoardList = () => {
+    return board.map((board) => {
     return (
-      <div>
-        <div>
-          {boardId == null || boardId == 0 ? (
-            <div>
-              <h1>보드 페이지입니다</h1>
-              <p>보드를 생성하거나, 보드를 불러와주세요</p>
-            </div>
-          ) : (
-            <h1 className="board-description">{boardDescription}</h1>
-          )}
-          <div className="column-container">
-            <ColumnItem boardId={boardId} />
-          </div>
-        </div>
-      </div>
+    <li className="my-board-list" key={board.boardId}>
+    {board.description}
+    </li>
     );
-  };
-
-  return (
-    <div>
-      <div className="board-container">
-        <BoardList />
-      </div>
+    });
+    };
+    
+    return (
+    <div className="my-board-modal outer">
+    <div className="my-board-container inner">
+    <h3>내 보드 목록</h3>
+    <ul>
+    <MyBoardList />
+    </ul>
     </div>
-  );
-};
-
-export default Board;
+    </div>
+    );
+    };
+    
+    const BoardList = () => {
+    return (
+    <div>
+    <div>
+    {boardId == null || boardId == 0 ? (
+    <div>
+    <h1>보드 페이지입니다</h1>
+    <MyBoard />
+    </div>
+    ) : (
+    <h1 className="board-description">{boardDescription}</h1>
+    )}
+    <div className="column-container">
+    <ColumnItem boardId={boardId} />
+    </div>
+    </div>
+    </div>
+    );
+    };
+    
+    return (
+    <div>
+    <div className="board-container">
+    <BoardList />
+    </div>
+    </div>
+    );
+    };
+    
+    export default Board;
